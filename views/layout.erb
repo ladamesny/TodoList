@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf8"> 
+  <title><%= @title +'|Todo'%></title>
+  <!-- <script type="text/javascript" src="/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src ="/app.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="/app.css">
+</head>
+<body>
+  <header>
+  <h1> <a href="/">TODO LIST</a> </h1>
+  <h2> <%= @title %> </h2>  
+  </header>
+
+  <div id="main">
+    <%= yield %>
+  </div>
+  <footer>
+    <p>&copy;TurnToTech Samples</p>
+  </footer>
+
+</body>
+</html>
