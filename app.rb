@@ -9,6 +9,7 @@ class Todo
   property :id, Serial
   property :content, Text, :required => true
   property :done, Boolean, :required => true, :default => false
+  property :flag, Boolean, :required => true, :default => false
   property :created_at, DateTime
   property :updated_at, DateTime
 end
@@ -16,10 +17,15 @@ end
 DataMapper.finalize.auto_upgrade!
 
 get '/' do 
-  @todos = Todo.all :order => :id.desc
+  @todos = Todo.all :order => :id.asc
   @title = "All Notes"
   redirect '/new' if @todos.empty?
   erb :index
+end
+
+get '/update' do
+  @todos = Todo.all :order => :id.desc
+  @todos.to_json
 end
 
 get '/new' do
@@ -37,7 +43,7 @@ post '/' do
 end
 
 get '/:id' do
-  @todo = Todo.get params[:id]
+  @n = Todo.get params[:id]
   @title = "Edit todo ##{params[:id]}"
   erb :edit
 end
@@ -49,6 +55,14 @@ put '/:id' do
   n.updated_at =Time.now
   n.save
   redirect '/'
+end
+
+post '/:id/flag' do
+  @n = Todo.get(params[:id])
+  @n.flag = !@n.flag
+  @n.updated_at =Time.now
+  @n.save
+  erb :flag, :layout => false  
 end
 
 get '/:id/delete' do

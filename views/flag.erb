@@ -1,0 +1,5 @@
+<% if @n.flag==false %>
+    <button id="flag" data-id="<%= @n.id %>">flag</button>
+<% else %>
+    <img id = 'priority' data-id="<%= @n.id %>" src='/images/important.jpg'>
+<% end %>

@@ -1,18 +1,38 @@
-<ul>
-<% @todos.each do |item| %>
-  <li>
-    <p>
-      <%= item.content %>
-      <input id ="checks" type="checkbox" name="done" <%="checked" if item.done %> enabled>
-      <span> <a href="/<%=item.id%>">[Edit]</a></span>
-      <a href="/<%=item.id%>/delete">[Delete]</a>
-    </p>
-  </li>
+<!-- <div id="filters">
+  <button class="priority-filter">IMPORTANT</button>
+  <button class="all-filter">ALL</button>
+</div>
+ -->
+<table id="ajaxTarget">
+  <tr>
+    <th> No.</th>
+    <th>Item</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>Done</th>
+    <th>Important</th>
+  </tr>
+
+  <% @todos.each do |item|%>
+      <tr>
+      <td><%=item.id%></td>
+      <td><%=item.content%></td>   
+      <td><a href="/<%=item.id%>">[E]</a></td> 
+      <td><a href="/<%=item.id%>/delete">[D]</a></td>
+      <td><input type="checkbox" name="done" <%="checked" if item.done %>></td> 
+      <td id="indicate<%=item.id%>">
+      <% if item.flag == false %>
+          <button id="flag" data-id="<%= item.id %>">flag</button>
+      <% else %>
+          <img id = 'priority' data-id="<%= item.id %>" src='/images/important.jpg'>
+      <% end %>
+      </td> 
+    </tr>
   <% end %>
-</ul>
+</table>
 
 <section id="add">
-  <form id ="add_item" action="/" method="post">
+  <form action='/' method="POST">
     <textarea name="content" placeholder="Todos&hellip;"></textarea>
     <br>
     <input id="button" type="submit" value ="Add Todo item">
