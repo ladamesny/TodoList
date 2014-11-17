@@ -7,7 +7,8 @@ $("#ajaxTarget").on('click', '#flag, #priority', function(){
   });
 });
 
-$("#editajaxTarget").on('click', '#flag, #priority', function(){
+$("#editajaxTarget").on('click', '#flag, #priority', function(event){
+  event.preventDefault();
   var id = $(this).data("id");
   $.post('/'+id+'/flag', function(data){
     $("#editajaxTarget #indicate"+id).html(data)
