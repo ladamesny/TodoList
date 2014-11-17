@@ -7,6 +7,7 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/app.db")
 class Todo
   include DataMapper::Resource
   property :id, Serial
+  property :no, Integer
   property :content, Text, :required => true
   property :done, Boolean, :required => true, :default => false
   property :flag, Boolean, :required => true, :default => false
@@ -18,6 +19,14 @@ DataMapper.finalize.auto_upgrade!
 
 get '/' do 
   @todos = Todo.all :order => :id.asc
+  if !@todos.empty?
+    index = 1
+    @todos.each do |item|
+      item.no = index
+      index +=1
+    end
+  end
+  @todos.save
   @title = "All Notes"
   redirect '/new' if @todos.empty?
   erb :index
@@ -39,12 +48,21 @@ post '/' do
   ob.created_at =Time.now
   ob.updated_at =Time.now
   ob.save
+  todos = Todo.all
+  if !todos.empty?
+    index = 1
+    todos.each do |item|
+      item.no = index
+      index +=1
+    end
+  end
+  todos.save
   redirect '/'
 end
 
 get '/:id' do
   @n = Todo.get params[:id]
-  @title = "Edit todo ##{params[:id]}"
+  @title = "Edit todo ##{@n.no}"
   erb :edit
 end
 
@@ -67,7 +85,7 @@ end
 
 get '/:id/delete' do
   @todo = Todo.get params[:id]
-  @title = "Confirm deletion of todo ##{params[:id]}"
+  @title = "Confirm deletion of todo ##{@todo.no}"
   erb :delete
 end
 

@@ -1,6 +1,6 @@
 <% if @todo %>
   <p>Are you sure you want to delete the folowing todo: <em>"<%= @todo.content %>"</em>? </p>
-  <form action="/<%= @todo.id %>" method="post">
+  <form action="/<%= @todo.no %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Yes, Delete It!">
     <a href="/<%= @todo.id%>">  Cancel</a>

@@ -12,10 +12,9 @@
     <th>Done</th>
     <th>Important</th>
   </tr>
-
   <% @todos.each do |item|%>
       <tr>
-      <td><%=item.id%></td>
+      <td><%=item.no%></td>
       <td><%=item.content%></td>   
       <td><a href="/<%=item.id%>">[E]</a></td> 
       <td><a href="/<%=item.id%>/delete">[D]</a></td>
