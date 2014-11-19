@@ -1,0 +1,14 @@
+<tr>
+  <td><%=@ob.no%></td>
+  <td><%=@ob.content%></td>   
+  <td><a href="/<%=@ob.id%>">[E]</a></td> 
+  <td><a href="/<%=@ob.id%>/delete">[D]</a></td>
+  <td><input type="checkbox" name="done" <%="checked" if @ob.done %>></td> 
+  <td id="indicate<%=@ob.id%>">
+  <% if @ob.flag == false %>
+      <button id="flag" data-id="<%= @ob.id %>">flag</button>
+  <% else %>
+      <img id = 'priority' data-id="<%= @ob.id %>" src='/images/important.jpg'>
+  <% end %>
+  </td> 
+</tr>

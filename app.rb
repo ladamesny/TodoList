@@ -32,11 +32,6 @@ get '/' do
   erb :index
 end
 
-get '/update' do
-  @todos = Todo.all :order => :id.desc
-  @todos.to_json
-end
-
 get '/new' do
   @title = "New"
   erb :new
@@ -57,7 +52,14 @@ post '/' do
     end
   end
   todos.save
-  redirect '/'
+  redirect to '/addNew'
+end
+
+# This is the ajax route for adding a new todo item
+get '/addNew' do
+  @ob=Todo.last
+  erb :add, :layout => false
+  
 end
 
 get '/:id' do
