@@ -24,8 +24,12 @@ $("#add").on('click','#button', function(e){
       $("#ajaxTarget").append(response);
       $("#text-data").val("");
     }
-    // $('#ajaxTarget').append(data);
   });
+
+$("#ajaxTarget").on('click','#delete', function(){
+  var id= $(this).data("id");
+  alert(id);
+});
 
 });
 

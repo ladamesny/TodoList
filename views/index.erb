@@ -16,8 +16,8 @@
       <tr>
       <td><%=item.no%></td>
       <td><%=item.content%></td>   
-      <td><a href="/<%=item.id%>">[E]</a></td> 
-      <td><a href="/<%=item.id%>/delete">[D]</a></td>
+      <td> <img id="edit" src="/images/edit.png" data-id="<%=item.id%>"></td> 
+      <td> <img id="delete" src="/images/delete.jpeg" data-id="<%=item.id%>"></td>
       <td><input type="checkbox" name="done" <%="checked" if item.done %>></td> 
       <td id="indicate<%=item.id%>">
       <% if item.flag == false %>

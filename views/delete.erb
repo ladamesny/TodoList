@@ -3,7 +3,7 @@
   <form action="/<%= @todo.id %>" method="post">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Yes, Delete It!">
-    <a href="/<%= @todo.id%>">  Cancel</a>
+    <a href="/">  Cancel</a>
   </form>
 <% else %>
   <p>Todo not found.</p>
